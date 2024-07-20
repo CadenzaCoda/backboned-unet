@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 from torchvision import models, datasets, transforms
+# from torchvision.models import ResNet18_Weights
 from torch.nn import functional as F
 
 
@@ -12,29 +13,40 @@ def get_backbone(name, pretrained=True):
 
     # loading backbone model
     if name == 'resnet18':
-        backbone = models.resnet18(pretrained=pretrained)
+        # backbone = models.resnet18(pretrained=pretrained)
+        backbone = models.resnet18(weights=models.ResNet18_Weights.DEFAULT if pretrained else None)
     elif name == 'resnet34':
-        backbone = models.resnet34(pretrained=pretrained)
+        # backbone = models.resnet34(pretrained=pretrained)
+        backbone = models.resnet34(weights=models.ResNet34_Weights.DEFAULT if pretrained else None)
     elif name == 'resnet50':
-        backbone = models.resnet50(pretrained=pretrained)
+        # backbone = models.resnet50(pretrained=pretrained)
+        backbone = models.resnet50(weights=models.ResNet50_Weights.DEFAULT if pretrained else None)
     elif name == 'resnet101':
-        backbone = models.resnet101(pretrained=pretrained)
+        # backbone = models.resnet101(pretrained=pretrained)
+        backbone = models.resnet101(weights=models.ResNet101_Weights.DEFAULT if pretrained else None)
     elif name == 'resnet152':
-        backbone = models.resnet152(pretrained=pretrained)
+        # backbone = models.resnet152(pretrained=pretrained)
+        backbone = models.resnet152(weights=models.ResNet152_Weights.DEFAULT if pretrained else None)
     elif name == 'vgg16':
-        backbone = models.vgg16_bn(pretrained=pretrained).features
+        # backbone = models.vgg16_bn(pretrained=pretrained).features
+        backbone = models.vgg16(weights=models.VGG16_Weights.DEFAULT if pretrained else None)
     elif name == 'vgg19':
-        backbone = models.vgg19_bn(pretrained=pretrained).features
+        # backbone = models.vgg19_bn(pretrained=pretrained).features
+        backbone = models.vgg19(weights=models.VGG19_Weights.DEFAULT if pretrained else None)
     # elif name == 'inception_v3':
     #     backbone = models.inception_v3(pretrained=pretrained, aux_logits=False)
     elif name == 'densenet121':
-        backbone = models.densenet121(pretrained=True).features
+        # backbone = models.densenet121(pretrained=True).features
+        backbone = models.densenet121(weights=models.DenseNet121_Weights.DEFAULT if pretrained else None)
     elif name == 'densenet161':
-        backbone = models.densenet161(pretrained=True).features
+        # backbone = models.densenet161(pretrained=True).features
+        backbone = models.densenet161(weights=models.DenseNet161_Weights.DEFAULT if pretrained else None)
     elif name == 'densenet169':
-        backbone = models.densenet169(pretrained=True).features
+        # backbone = models.densenet169(pretrained=True).features
+        backbone = models.densenet169(weights=models.DenseNet169_Weights.DEFAULT if pretrained else None)
     elif name == 'densenet201':
-        backbone = models.densenet201(pretrained=True).features
+        # backbone = models.densenet201(pretrained=True).features
+        backbone = models.densenet201(weights=models.DenseNet201_Weights.DEFAULT if pretrained else None)
     elif name == 'unet_encoder':
         from unet_backbone import UnetEncoder
         backbone = UnetEncoder(3)
